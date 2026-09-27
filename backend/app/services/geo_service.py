@@ -168,6 +168,70 @@ async def _ipwhois_lookup(ip: str) -> Optional[dict]:
         "raw": data,
     }
 
+async def _ipinfo_lookup(ip: str) -> Optional[dict]:
+    import os
+
+    token = os.getenv("IPINFO_TOKEN")
+    if not token:
+        return None
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            f"https://ipinfo.io/{ip}/json",
+            params={"token": token},
+            timeout=6,
+        )
+
+    response.raise_for_status()
+    data = response.json()
+
+    if not data.get("country"):
+        return None
+
+    asn_data = data.get("asn") or {}
+    asn = asn_data.get("asn")
+
+    latitude = longitude = None
+    loc = data.get("loc")
+    if loc and "," in loc:
+        try:
+            latitude, longitude = [
+                float(value) for value in loc.split(",", 1)
+            ]
+        except ValueError:
+            pass
+
+    return {
+        "country": data.get("country"),
+        "country_code": data.get("country"),
+        "region": data.get("region"),
+        "city": data.get("city"),
+        "asn": asn,
+        "asn_name": asn_data.get("name"),
+        "isp": asn_data.get("name"),
+        "org": asn_data.get("name"),
+        "reverse_dns": data.get("hostname"),
+        "network": asn_data.get("route"),
+        "network_type": asn_data.get("type"),
+        "infrastructure_type": (
+            "Hosting" if asn_data.get("type") == "hosting" else None
+        ),
+        "confidence": None,
+        "accuracy_radius_km": None,
+        "location_note": (
+            "Approximate infrastructure location; "
+            "city-level data is not precise."
+        ),
+        "postal_code": data.get("postal"),
+        "timezone": data.get("timezone"),
+        "latitude": latitude,
+        "longitude": longitude,
+        "source": "IPINFO",
+        "provider": "ipinfo.io",
+        "status": "FOUND",
+        "checked_at": datetime.now(timezone.utc).isoformat(),
+        "raw": data,
+    }
 
 def _resolve_ptr(ip: str) -> dict:
     try:
@@ -380,13 +444,27 @@ async def lookup_ip(ip: str) -> Optional[dict]:
             logger.warning("%s GeoIP lookup failed for %s", provider, address, exc_info=True)
             return _provider_outcome(source, provider, "ERROR")
 
-    ip_api_result, ipwhois_result = await asyncio.gather(
-        run_provider("IP_API", "IP-API", _ip_api_lookup),
-        run_provider("IPWHOIS", "ipwho.is", _ipwhois_lookup),
+    ipinfo_result = await run_provider(
+    "IPINFO", "ipinfo.io", _ipinfo_lookup
     )
+
+    ip_api_result = await run_provider(
+    "IP_API", "IP-API", _ip_api_lookup
+)
+
+    ipwhois_result = await run_provider(
+    "IPWHOIS", "ipwho.is", _ipwhois_lookup
+    )
+
     ptr_result = await asyncio.to_thread(_resolve_ptr, str(address))
     return _merge_provider_results(
-        [maxmind_result, ip_api_result, ipwhois_result, ptr_result]
+    [
+        maxmind_result,
+        ipinfo_result,
+        ip_api_result,
+        ipwhois_result,
+        ptr_result,
+    ]
     )
 
 
