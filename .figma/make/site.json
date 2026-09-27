@@ -1,0 +1,10 @@
+{
+  "description": "Streamline email threat investigations with AI-powered analysis, extracting indicators of compromise and generating forensic reports for security analysts.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
