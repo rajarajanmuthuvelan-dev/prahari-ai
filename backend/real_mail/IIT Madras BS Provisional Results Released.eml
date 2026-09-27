@@ -1,0 +1,272 @@
+Delivered-To: rajarajanmuthuvelan2008r@gmail.com
+Received: by 2002:a05:7010:fa0c:b0:54d:f9c1:d2d with SMTP id qv12csp5509767mdb;
+        Tue, 15 Sep 2026 10:20:07 -0700 (PDT)
+X-Forwarded-Encrypted: i=5; AKwUvBwqFkz0BMaP7l2Cu0WEHHjaSt4+OSzyIBzmQzkwPtMw/Vcu4PvB1JoWJDEAVRbse5ZDjXGHrVI41CBd63ZhdCs7U4vt2Dup2Hs=@gmail.com
+X-Received: by 2002:a05:6214:5b0f:b0:910:4dce:6a0d with SMTP id 6a1803df08f44-9122e544efbmr133919096d6.18.1789492807102;
+        Tue, 15 Sep 2026 10:20:07 -0700 (PDT)
+ARC-Seal: i=4; a=rsa-sha256; t=1789492807; cv=pass;
+        d=google.com; s=arc-20260327;
+        b=Q+f5XuNGHpq3XkMo+UD7ZiuxorpWf8k4oi42yC7btOkrLhU514sm+ygm7iYiWj934c
+         6jPMkGbkhnyiNkfYWtxRU11FYQGz/rDEEpnEJbbEDzlbdYu2k+hfqC5O1Y5kJfjaWTjq
+         Fp+yHIFqEcQcrwM+MRCFpEO4+NjzhUhpTazES05xcc5/R6UyacrHiU2diJafMDzt1BMz
+         ura2nMGxhbNlGjIRi1tzfZOu5G3Xz2bFUtcc74mFF9HSpmQmuhGskZfPEWWFLNXwq29Q
+         XY1nXSh3boLxqmcqrtqWfdwjRQ64rScQbtvfYkNCyICGHF0R+fbSPqOjSjAY8F7t+cOt
+         P2DQ==
+ARC-Message-Signature: i=4; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:to:subject:message-id:date:from
+         :mime-version:dkim-signature;
+        bh=KZXp7YEWXTttgGMJACJSnJ7wJGt80Brewpz/DnKLvwE=;
+        fh=bB0dVOiBq//ExHWAMP7EX8mG1gZ3upp1zTyzFzf3UEo=;
+        b=r51BpmeSCr0NWxg7bUragotx7f7GFLDRWHaqQSgq8S3eowyE8E2qkh/LV31bqvKYdI
+         CX42cJsl6TzVOWMGSHPAiI/Ca5FC5B4HxzpUgHGsDdv1tCzWMYIrS5O2FmGxlr0MmF0V
+         4zFonhoDysDmZw2dM5g56pjwfNXxpEESuDyeIUaADEs7omLm7KYyFXk+/ktpNsg5s0th
+         FoudSnCLEY4gWpHmGdkprpMg52tgqVpuh+43lrallYwjOhel9zvyvRtrldQKVV62P4Xw
+         zqNeN7tT6ngRT0ep7Vg7Ugruaq0lK+CezLoBmJrMCk1BS+JecFb/+3+eMswrqA+J7OqL
+         N0bg==;
+        dara=google.com
+ARC-Authentication-Results: i=4; mx.google.com;
+       dkim=pass header.i=@unknowniitians.com header.s=ui header.b=YOujHr9L;
+       arc=pass (i=3 spf=pass spfdomain=unknowniitians.com dkim=pass dkdomain=unknowniitians.com dmarc=pass fromdomain=unknowniitians.com);
+       spf=pass (google.com: domain of ui-announcements-17+bncbdhl7wxoymnbbq74uxkqmgqeowe35jy@unknowniitians.com designates 209.85.220.77 as permitted sender) smtp.mailfrom=ui-announcements-17+bncBDHL7WXOYMNBBQ74UXKQMGQEOWE35JY@unknowniitians.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=unknowniitians.com;
+       dara=neutral header.i=@gmail.com
+Return-Path: <ui-announcements-17+bncBDHL7WXOYMNBBQ74UXKQMGQEOWE35JY@unknowniitians.com>
+Received: from mail-sor-f77.google.com (mail-sor-f77.google.com. [209.85.220.77])
+        by mx.google.com with SMTPS id 6a1803df08f44-9123bf31baasor1817686d6.6.2026.09.15.10.20.06
+        for <rajarajanmuthuvelan2008r@gmail.com>
+        (Google Transport Security);
+        Tue, 15 Sep 2026 10:20:07 -0700 (PDT)
+Received-SPF: pass (google.com: domain of ui-announcements-17+bncbdhl7wxoymnbbq74uxkqmgqeowe35jy@unknowniitians.com designates 209.85.220.77 as permitted sender) client-ip=209.85.220.77;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@unknowniitians.com header.s=ui header.b=YOujHr9L;
+       arc=pass (i=3 spf=pass spfdomain=unknowniitians.com dkim=pass dkdomain=unknowniitians.com dmarc=pass fromdomain=unknowniitians.com);
+       spf=pass (google.com: domain of ui-announcements-17+bncbdhl7wxoymnbbq74uxkqmgqeowe35jy@unknowniitians.com designates 209.85.220.77 as permitted sender) smtp.mailfrom=ui-announcements-17+bncBDHL7WXOYMNBBQ74UXKQMGQEOWE35JY@unknowniitians.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=unknowniitians.com;
+       dara=neutral header.i=@gmail.com
+ARC-Seal: i=3; a=rsa-sha256; t=1789492806; cv=pass;
+        d=google.com; s=arc-20260327;
+        b=ibngb+oA+XC3GB8SWlPn7SrGaqL0QdZe+C0YQtFYMCGa4IAW2o9mpymsdrtp4SkFXI
+         pQ0qO2ND6SvKJ0Jb+rEhWkx8Lm9e9zJC1oeiZo2wY5YlBIaKHu2jmB3y7PWDu4TtdvZV
+         Vmf4AuRijp/jm6hG6jU2B3FMh1p1CiVHGLsTkEQOwPC83hSEMq+SKkmiyWNjW+yCJkzo
+         AZDBuCWwqtc2hXPoLN0m+MjbJrjdzrIbONjTHWroqNjV4kw4rIPvD/TYmC4IGXTJUUuT
+         v3s3o7owAso1INtZN10JOYKD6J0B0MAqWeEookwIYY8Ji8kEaq4RrNbNbYoZstom2dgM
+         7bhw==
+ARC-Message-Signature: i=3; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:to:subject:message-id:date:from
+         :mime-version:dkim-signature;
+        bh=KZXp7YEWXTttgGMJACJSnJ7wJGt80Brewpz/DnKLvwE=;
+        fh=bB0dVOiBq//ExHWAMP7EX8mG1gZ3upp1zTyzFzf3UEo=;
+        b=sWYXwpvjehNK+ppE4hQ/6QHT90mUkxxRO4k/s8Rulb02GCH1Q0rDbUuRLgFiPsBE0m
+         VftoGeV69yfFPM7iHaDtCjYsY1bb0ALq018XULvsBZ1cN13zUGJoBpAd9a9qlghAm5PZ
+         EkbRktqqXEwpjywoQDGQ08kf9lU6AlmR82V7yTjcPVY5/LY3pNyMNH0f0G/2RpXogLC2
+         +g/0HMm8eLUJQxe+HtMpCCZx4o4XxvE/BQ4jrQ9tqM7w/UZJYXrlTod+TxIW8aHgV96w
+         /VUhnMkVPCykt4QFagXXkC4HfI6RMtZC4QnGsD92HHgNG91XeDXoIjAP6bHRlchHVbsW
+         eZcA==;
+        dara=google.com
+ARC-Authentication-Results: i=3; mx.google.com;
+       dkim=pass header.i=@unknowniitians.com header.s=ui header.b=ImxTXbN6;
+       arc=pass (i=1);
+       spf=pass (google.com: domain of desk@unknowniitians.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=desk@unknowniitians.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=unknowniitians.com;
+       dara=neutral header.i=@unknowniitians.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=unknowniitians.com; s=ui; t=1789492806; x=1790097606; dara=google.com;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:x-original-authentication-results
+         :x-original-sender:content-type:to:subject:message-id:date:from
+         :mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=KZXp7YEWXTttgGMJACJSnJ7wJGt80Brewpz/DnKLvwE=;
+        b=YOujHr9LHl05/GqQJwZqT9biPfoAQgiEd/mL9EJUQTlDTEJky8OTg3FX4nxBCypCXw
+         fuZcglrqQ84D7VoEB/fgMzJg8jD7OdUHnR/q8j/wSM2zGvhP9KeGAS+Codczqh4Qp0kY
+         k6WG10ou6lfNdkj9PrFq0QigG0R/4dZ9neOQs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789492806; x=1790097606;
+        h=list-unsubscribe:list-archive:list-help:list-post
+         :x-spam-checked-in-group:list-id:mailing-list:precedence
+         :x-original-authentication-results:x-original-sender:content-type:to
+         :subject:message-id:date:from:mime-version:x-gm-gg:x-beenthere
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=KZXp7YEWXTttgGMJACJSnJ7wJGt80Brewpz/DnKLvwE=;
+        b=SUNn592q9QAhqd4QDIQEeRAwdFp1rRypFnCa52GKxN6EohoM/zAvoKkSnqM6BSFYhz
+         LmnaugPuoplCGnDFduh8uD4PjozdEQvLcLHTVKCFTaBphMHSXZZVGHyQSnVGr64dhFQu
+         exlx469ksEtdvKoAmyPBS1nODiwRQHviXayC6j6MQ+va8H2TAra6AkBhda5g/QJ2dgwg
+         7nHUozTxzOcbnPQ1o8W65PE+bEoag1mDMjDYlwxbkpViOCSCWBLOXF7/8waGMz6d7JKO
+         UZ1GfIrJYNUc+JBNud6tavO8jROIM85PQ4lVaXTM/4l2qer+IJa7eFaepbiRxWiuVY45
+         yZDg==
+X-Forwarded-Encrypted: i=3; AKwUvByp47ckuv9uhBUbKwCK0TB6tiVarSOlf5t5gJGLfU4S2+pTzkP662CUL4jmgRbdlFpl/fQvP2DNvD59oK9YXwYkWOCNBR7UYfk=@gmail.com
+X-Gm-Message-State: AFuF++klbYMq859d1smZuNXoSiyUGmCSSce/jyfA0BMeZdVuT3xKtlTJ
+	AA/Q5muwHFqtkPYUBdj1g7Ld7jdaxpmjCp5aLNgXf+ANIq0CTdcYkMd7EEvb5uZ1rCpD
+X-Received: by 2002:a05:6214:2f8f:b0:910:2f02:8c46 with SMTP id 6a1803df08f44-9122e4e52damr153815076d6.14.1789492806006;
+        Tue, 15 Sep 2026 10:20:06 -0700 (PDT)
+X-BeenThere: ui-announcements-17@unknowniitians.com; h="ATskLdc0OhuC6beff9mU0jAwfSNZLRfwz28OgxU/g1MnFcpb9A=="
+Received: by 2002:a05:6214:1bcb:b0:90c:d154:8d9f with SMTP id
+ 6a1803df08f44-91202858b3cls145437546d6.0.-pod-prod-06-us; Tue, 15 Sep 2026
+ 10:20:03 -0700 (PDT)
+X-Forwarded-Encrypted: i=3; AKwUvBz/VqerRXT6QMelleqThnVmjE5zVjwO1uf/EFbFkPK/6ahnerZeN+xqNVpulJQSOIcK4sTAeql5IkIIjKrFghuhQrU+@unknowniitians.com
+X-Received: by 2002:a05:6122:547:b0:5c8:2ad8:1484 with SMTP id 71dfb90a1353d-5c981ad6d23mr10932810e0c.1.1789492802950;
+        Tue, 15 Sep 2026 10:20:02 -0700 (PDT)
+ARC-Seal: i=2; a=rsa-sha256; t=1789492802; cv=pass;
+        d=google.com; s=arc-20260327;
+        b=rtwg83xY6Px9jqbaxn7yvI1eNn/f0OV3OqCRMs8EH9TsYroiZcz39ytQGPInhZHfTi
+         1PrpocMwcf0Kyg9U941vW+Mh7yUFBznfv3AYSzheHTKefsQqfETVzhOcNytVZy8ejn2R
+         UucBbPjtHkONClERDBvBT/qsW4DM+32MefgkPy6kQPxDdhH2nlAmp0zSATawGg1dCYBJ
+         kmVe2S6eCbJ+Q1m6EIqn7z3uQ42l4c5RTVqBoWrH9/tA+JY0edeALHjg1QoIhqXudI1h
+         qt60yCzX+GenG9gIHYaj/7oXz2ep/DEnilmlTjeHvUuORpmrYR3Xb6lzzlJ4Ujrs5v60
+         mfdw==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=lcxIYRuRyxsZVazfBXQ12RhLR2cWPVQ0GP30Pw7f/nQ=;
+        fh=gb2r+C0f2K8fDNUS/QPm502mz4T2itbXUv5tbumrkfA=;
+        b=R/xzFr2zpdC6A9w60vac0ct3LH3QOjocY2/sdPFEzuxt0gisRmFGj8eMZBzDbZGrEH
+         SlmjRrw+TJ8FbqVuq4HOtFqExUpRRo8VO4KJulIw5TIcHa2IQO6J69IZJhpPSXvTYZUQ
+         ZNKqgyrZDodjXs4/C3Rp8eQ/jQWOnuf4ag4cAbflUajYdiWRtWg7KBORmja+IrhiQeKq
+         dd2QmuB6quK4G2J1xwkZEveTBx8WAyIMsaQ5warya4AowfkhA3sXXBcNlExAjkquqGbb
+         dOtw5/cxPoCgPW/j4DqFbfI+wy7DOJX3TnPDDveviTGaPEnaXIE9aEpXpWNmeiW0Wprs
+         sLUA==;
+        dara=google.com
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@unknowniitians.com header.s=ui header.b=ImxTXbN6;
+       arc=pass (i=1);
+       spf=pass (google.com: domain of desk@unknowniitians.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=desk@unknowniitians.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=unknowniitians.com;
+       dara=neutral header.i=@unknowniitians.com
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id a1e0cc1a2514c-983152a86absor9662241.8.2026.09.15.10.20.02
+        for <ui-announcements-17@unknowniitians.com>
+        (Google Transport Security);
+        Tue, 15 Sep 2026 10:20:02 -0700 (PDT)
+Received-SPF: pass (google.com: domain of desk@unknowniitians.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+ARC-Seal: i=1; a=rsa-sha256; t=1789492802; cv=none;
+        d=google.com; s=arc-20260327;
+        b=jnDYysllFBmwRZxWNAoLXQno3YW0TweCNBibgWuTVXFhkqpwM0O/rkjjJ0ZC9L1ktu
+         1DHzEuCdNNiAMBYOMy6sbykeVXaI9sqeW8mcUTJbgyqds1L7pHCHYgNdQTW+rSMH5toh
+         lqnXLfTIt6KwEUAFpbTLzhFMfHACVa19IyKj4yxrxKvDML5WZKmP/cXXaKGia7Tt1MU2
+         jCwyrDT6tvKCC+T9CDRbM0HMdppkwRJj4M/xLPeNZCCCCIgOWfdWTiE0orrwbcc9xgbp
+         R2huBBElQtD3BAQUB2opAQEyPBn7D4gHO9aYmMzfPLQkhXVeqMeQRgAwVZ6Dp1qGr7zm
+         w9XQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=lcxIYRuRyxsZVazfBXQ12RhLR2cWPVQ0GP30Pw7f/nQ=;
+        fh=gb2r+C0f2K8fDNUS/QPm502mz4T2itbXUv5tbumrkfA=;
+        b=nzUeCJDO9vQg9ltuBfq6WKZ+3QXxzqdt7/YoZ8skGLVV1i2SpiMv9dCd8V9qtJOQQ9
+         Pqb8cUL8sCql3s/m3HPQY6pQg5NfvLjn9yKRtslTslOfVRBRMVT1DbJ1kdwh2Ew2/GYk
+         1RVq9wRBn7QkgnggXmt7hs3zUxHhrG+d1ofUj80OE3FqcubGfRf5aUMNt7t4IdtxYRFU
+         mQU3offlpSLl6ru6Mxl2MaPO1ak5gN4QOLqyHl4R8FwzJK8edWTa6N1iUlBW5RJLmMhK
+         PoyF0ARO8CUOmpdVeoLLxMvtHxmnqqhxEwlAhq1SVHQqNAaTFSZLTFYRzTPahLZyW7QM
+         KoQg==;
+        darn=unknowniitians.com
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Forwarded-Encrypted: i=1; AKwUvBzcTHwc5uU1LzM1kSg0cdfUaKrbIrMPD3wnnv58U2Lu1kjqTdJxginBmAiHleulM+Gpr23HksEEAQkoKErhWBet6iVW@unknowniitians.com
+X-Gm-Gg: AYBFou14m1wUzIjcv13fUIRxVw1KiPK7HQjmHIRFFmkFoAifNMF9pVI5TjeS9dkqB3f
+	FkvFgrinrTjxOCV88SrVs7RXlSIP9Q5aw45/AZSkfJAJB1tQ+l1kHmPLmGqE2e0csXP3ENZNlwZ
+	ZH5LKpAv9N/4OLiy1jZD41nZoerHJjymBdo9BQmFt03OXegBiWJf/rKQKa2NVmJz2uINJf1M6C2
+	aBySwjSgGpknsF90dFLozgAasmIvZieGr3Vx/b0CSdXHmX+goObHp/t/SzoaMTLKqs/ZqxRRoT2
+	b6dI+a5CUbopTOrmclJnItqnmQZYaqezqLBP8f9mnf/jzw76qg+Gl7p7r8G3vXkOFY6oi2FX9rk
+	Iqle7GelSmlHVgA==
+X-Received: by 2002:a05:6102:3706:b0:79c:2e36:a2e8 with SMTP id
+ ada2fe7eead31-79c2e36a8bbmr9448218137.5.1789492802372; Tue, 15 Sep 2026
+ 10:20:02 -0700 (PDT)
+MIME-Version: 1.0
+From: Unknown IITians <desk@unknowniitians.com>
+Date: Tue, 15 Sep 2026 22:49:49 +0530
+X-Gm-Features: AcwNN1WWheFwdWRLfP6q3n8fxDyIA-smUEVAq6QGYKqA9zuQ9g2SGcnABpnq9WI
+Message-ID: <CAHxk8kR-tKM6d4hQh+t3O=nMYebgagt3_P4uZ1ZpJwNiDeWKDg@mail.gmail.com>
+Subject: IIT Madras BS Provisional Results Released
+To: undisclosed-recipients:;
+Content-Type: multipart/alternative; boundary="000000000000d05a3b065b88c2b1"
+Bcc: ui-announcements-17@unknowniitians.com
+X-Original-Sender: desk@unknowniitians.com
+X-Original-Authentication-Results: mx.google.com;       dkim=pass
+ header.i=@unknowniitians.com header.s=ui header.b=ImxTXbN6;       arc=pass
+ (i=1);       spf=pass (google.com: domain of desk@unknowniitians.com
+ designates 209.85.220.41 as permitted sender) smtp.mailfrom=desk@unknowniitians.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=unknowniitians.com;
+       dara=neutral header.i=@unknowniitians.com
+Precedence: list
+Mailing-list: list ui-announcements-17@unknowniitians.com; contact ui-announcements-17+owners@unknowniitians.com
+List-ID: <ui-announcements-17.unknowniitians.com>
+X-Spam-Checked-In-Group: ui-announcements-17@unknowniitians.com
+X-Google-Group-Id: 715527351898
+List-Post: <https://groups.google.com/a/unknowniitians.com/group/ui-announcements-17/post>,
+ <mailto:ui-announcements-17@unknowniitians.com>
+List-Help: <https://support.google.com/a/unknowniitians.com/bin/topic.py?topic=25838>,
+ <mailto:ui-announcements-17+help@unknowniitians.com>
+List-Archive: <https://groups.google.com/a/unknowniitians.com/group/ui-announcements-17/>
+List-Unsubscribe: <mailto:googlegroups-manage+715527351898+unsubscribe@googlegroups.com>,
+ <https://groups.google.com/a/unknowniitians.com/group/ui-announcements-17/subscribe>
+
+--000000000000d05a3b065b88c2b1
+Content-Type: text/plain; charset="UTF-8"
+
+Provisional results have been released for all BS Degree branches,
+including:
+https://score-checker-379619009600.asia-south1.run.app/
+
+   -
+
+   Data Science, Electronic System, Management and Aerospace Engineering
+
+Check your grades, calculate your CGPA, and use our grade predictor to
+understand your performance.
+
+*CGPA Calculator*
+https://www.unknowniitians.com/exam-preparation/iitm-bs/tools/data-science/foundation/cgpa-calculator
+
+*Grade Predictor*
+https://www.unknowniitians.com/exam-preparation/iitm-bs/tools/data-science/foundation/grade-calculator
+
+Check your results and see where you stand.
+
+
+All the best
+Academic Coordination Team
+
+*Unknown IITians *
+
+You are receiving this email because you subscribed to the Unknown IITians
+forum.
+
+To unsubscribe from this group and stop receiving emails from it, send an email to ui-announcements-17+unsubscribe@unknowniitians.com.
+
+--000000000000d05a3b065b88c2b1
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"auto"><div dir=3D"ltr"><p><span style=3D"backg=
+round-color:transparent">Provisional results have been released for all BS =
+Degree branches, including:<br></span><a href=3D"https://score-checker-3796=
+19009600.asia-south1.run.app/" rel=3D"noreferrer" target=3D"_blank">https:/=
+/score-checker-379619009600.asia-south1.run.app/</a><span style=3D"backgrou=
+nd-color:transparent"></span></p><ul><li><p>Data Science,=C2=A0<span style=
+=3D"background-color:transparent">Electronic System,=C2=A0</span><span styl=
+e=3D"background-color:transparent">Management and=C2=A0</span><span style=
+=3D"background-color:transparent">Aerospace Engineering</span></p></li></ul=
+><p>Check your grades, calculate your CGPA, and use our grade predictor to =
+understand your performance.</p><p><strong>CGPA Calculator</strong><br><a h=
+ref=3D"https://www.unknowniitians.com/exam-preparation/iitm-bs/tools/data-s=
+cience/foundation/cgpa-calculator" rel=3D"noreferrer" target=3D"_blank">htt=
+ps://www.unknowniitians.com/exam-preparation/iitm-bs/tools/data-science/fou=
+ndation/cgpa-calculator</a></p><p><strong>Grade Predictor</strong><br><a hr=
+ef=3D"https://www.unknowniitians.com/exam-preparation/iitm-bs/tools/data-sc=
+ience/foundation/grade-calculator" rel=3D"noreferrer" target=3D"_blank">htt=
+ps://www.unknowniitians.com/exam-preparation/iitm-bs/tools/data-science/fou=
+ndation/grade-calculator</a></p><p>Check your results and see where you sta=
+nd.<br><br><br><font color=3D"#0000ff">All the best=C2=A0<br>Academic Coord=
+ination Team<br><b>Unknown=C2=A0IITians=C2=A0<br></b></font><br><br><span s=
+tyle=3D"font-size:x-small">You are receiving this email because you subscri=
+bed to the Unknown IITians forum.<br></span><br><br><br><br><br><br><br><br=
+><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></=
+p></div></div>
+</div>
+
+<p></p>
+
+To unsubscribe from this group and stop receiving emails from it, send an e=
+mail to <a href=3D"mailto:ui-announcements-17+unsubscribe@unknowniitians.co=
+m">ui-announcements-17+unsubscribe@unknowniitians.com</a>.<br />
+
+--000000000000d05a3b065b88c2b1--

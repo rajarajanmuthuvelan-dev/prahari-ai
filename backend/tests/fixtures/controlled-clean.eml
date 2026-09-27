@@ -1,0 +1,16 @@
+From: Alex Morgan <alex.morgan@company.example>
+To: Team <team@company.example>
+Subject: Weekly planning notes
+Date: Fri, 25 Sep 2026 09:00:00 +0000
+Message-ID: <weekly-notes-20260925@company.example>
+Authentication-Results: mx.company.example; spf=pass smtp.mailfrom=company.example; dkim=pass header.d=company.example; dmarc=pass header.from=company.example
+Content-Type: text/plain; charset=utf-8
+
+Hello team,
+
+The weekly planning meeting is scheduled for Tuesday at 10 AM. Please reply
+with any agenda items by Monday afternoon. The notes from last week's meeting
+are attached for reference.
+
+Regards,
+Alex

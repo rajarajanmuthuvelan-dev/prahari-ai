@@ -1,0 +1,71 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: prahari
+      POSTGRES_USER: prahari
+      POSTGRES_PASSWORD: prahari
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U prahari"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://prahari:prahari@postgres:5432/prahari
+      REDIS_URL: redis://redis:6379/0
+      ALLOWED_ORIGINS: '["http://localhost","http://localhost:80","http://localhost:8443","http://127.0.0.1:8443"]'
+      VIRUSTOTAL_API_KEY: ${VIRUSTOTAL_API_KEY:-}
+      ABUSEIPDB_API_KEY: ${ABUSEIPDB_API_KEY:-}
+      AI_MODELS_ENABLED: ${AI_MODELS_ENABLED:-true}
+      AI_BERT_MODEL_ID: ${AI_BERT_MODEL_ID:-ealvaradob/bert-finetuned-phishing}
+      AI_ROBERTA_MODEL_ID: ${AI_ROBERTA_MODEL_ID:-eduardocastellon/roberta-phishing-email-detector}
+      AI_BERT_LABEL_MAP: ${AI_BERT_LABEL_MAP:-'{"benign":"benign","phishing":"phishing"}'}
+      AI_ROBERTA_LABEL_MAP: ${AI_ROBERTA_LABEL_MAP:-'{"LABEL_0":"benign","LABEL_1":"phishing"}'}
+      AI_DEVICE: ${AI_DEVICE:-auto}
+      AI_MAX_SEQUENCE_LENGTH: ${AI_MAX_SEQUENCE_LENGTH:-512}
+      AI_BATCH_SIZE: ${AI_BATCH_SIZE:-8}
+      AI_MAX_INPUT_CHARACTERS: ${AI_MAX_INPUT_CHARACTERS:-50000}
+      AI_RISK_WEIGHT: ${AI_RISK_WEIGHT:-8}
+      AI_PHISHING_THRESHOLD: ${AI_PHISHING_THRESHOLD:-0.5}
+    volumes:
+      - huggingface_cache:/root/.cache/huggingface
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  redis_data:
+  huggingface_cache:

@@ -1,0 +1,17 @@
+From: PayPal Security <security@paypa1-notifications.com>
+To: Customer <customer@target.example>
+Subject: URGENT: Verify your account immediately
+Date: Fri, 25 Sep 2026 09:00:00 +0000
+Reply-To: recovery@secure-paypa1.example
+Message-ID: <account-review@paypa1-notifications.com>
+Received: from mail.paypa1-notifications.com (8.8.8.8) by mx.target.example; Fri, 25 Sep 2026 09:00:10 +0000
+X-Mailer: Bulk Email Sender v4
+Authentication-Results: mx.target.example; spf=fail smtp.mailfrom=paypa1-notifications.com; dkim=fail header.d=paypa1-notifications.com; dmarc=fail header.from=paypa1-notifications.com
+Content-Type: text/plain; charset=utf-8
+
+Dear customer,
+
+URGENT: Your account has been suspended. Verify your password immediately
+within 24 hours by clicking this secure account recovery link to avoid
+permanent closure:
+https://account-review.example.net/verify?redirect=login&token=review

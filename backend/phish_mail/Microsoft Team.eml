@@ -1,0 +1,38 @@
+Delivered-To: jacobcookofficial@gmail.com
+Return-Path: <noreply@microsoftonline-verify.com>
+Received: from mail.microsoftonline-verify.com (vps-291847.contabo.net. [178.238.225.91])
+by mx.google.com with ESMTPS id d2e1a72fcca58-7324af9c8a2si1287403b3a.102.2026.02.06.09.14.21
+for <jacobcookofficial@gmail.com>;
+Thu, 06 Feb 2026 09:14:22 -0800 (PST)
+Received-SPF: fail (google.com: domain of noreply@microsoftonline-verify.com does not designate 178.238.225.91 as permitted sender) smtp.mailfrom=noreply@microsoftonline-verify.com;
+Authentication-Results: mx.google.com;
+dkim=fail header.i=@microsoftonline-verify.com header.s=default header.b=none;
+spf=fail (google.com: domain of noreply@microsoftonline-verify.com does not designate 178.238.225.91 as permitted sender) smtp.mailfrom=noreply@microsoftonline-verify.com;
+dmarc=fail (p=NONE dis=NONE) header.from=microsoftonline-verify.com
+Content-Type: text/html; charset="UTF-8"
+Mime-Version: 1.0
+Content-Transfer-Encoding: 8bit
+To: jacobcookofficial@gmail.com
+Message-ID: <8c4f2e91.a03b7d44.1f2e8a@microsoftonline-verify.com>
+Date: Thu, 06 Feb 2026 17:14:18 +0000
+From: "Microsoft Account Team" <noreply@microsoftonline-verify.com>
+Subject: [Action Required] Unusual sign-in activity on your account
+X-Priority: 1
+
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Microsoft Account Security Alert</title></head>
+<body>
+<h2>Unusual sign-in activity</h2>
+<p>We detected something unusual about a recent sign-in to your Microsoft account.</p>
+<p>Country/region: Russia</p>
+<p>IP address: 91.234.99.42</p>
+<p>Date: February 6, 2026 4:32 AM UTC</p>
+<p>Platform: Windows 10</p>
+<p>Browser: Chrome 120.0</p>
+<p>If this wasn't you, please secure your account immediately.</p>
+<p><a href="https://bit.ly/3vF9xKz">Review recent activity</a></p>
+<p>This is a mandatory service notification. You are receiving this because your account requires immediate attention.</p>
+<p>Microsoft Corporation, One Microsoft Way, Redmond, WA 98052</p>
+</body>
+</html>

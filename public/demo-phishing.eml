@@ -1,0 +1,39 @@
+From: "PayPal Security" <security@paypa1-notifications.com>
+To: finance.team@targetcorp.in
+Subject: URGENT: Your Account Has Been Temporarily Suspended - Verify Now
+Date: Fri, 05 Sep 2026 08:47:11 +0000
+Message-ID: <3f9a2b1c.7d8e4f5@paypa1-notifications.com>
+Reply-To: noreply@secure-paypa1-verify.net
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Bulk Email Sender v4.2
+X-Originating-IP: 185.220.101.47
+X-Priority: 1 (Highest)
+Received: from mail.paypa1-notifications.com (185.220.101.47) by mx.targetcorp.in with SMTP id a7si1234567; Fri, 05 Sep 2026 08:47:22 +0000
+Received-SPF: fail (domain of paypa1-notifications.com does not designate 185.220.101.47 as permitted sender) client-ip=185.220.101.47; envelope-from=security@paypa1-notifications.com
+Authentication-Results: mx.targetcorp.in; spf=fail smtp.mailfrom=security@paypa1-notifications.com; dkim=fail header.d=paypa1-notifications.com; dmarc=fail action=quarantine header.from=paypa1-notifications.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=paypa1-notifications.com; s=mail; h=from:to:subject:date; bh=INVALID_HASH==; b=INVALID_SIG==
+
+Dear Valued Customer,
+
+We have detected unusual activity on your PayPal account and for your
+security, we have temporarily suspended it.
+
+ACTION REQUIRED: Please verify your account within 24 hours to restore
+full access and avoid permanent closure.
+
+Click the link below to verify your account immediately:
+https://paypa1-verify-account.net/secure/login?token=aHR0cHM6Ly9wYXlwYWwuY29t&ref=urgent&campaign=suspension_alert
+
+If you do not verify within 24 hours, your account will be PERMANENTLY
+CLOSED and all remaining funds will be frozen pending investigation.
+
+This is an automated security notification. Do not reply to this email.
+
+PayPal Security Team
+www.paypal.com
+
+--
+To unsubscribe from PayPal security alerts, click here:
+https://paypa1-notifications.com/unsubscribe?id=7f3a9b2c
