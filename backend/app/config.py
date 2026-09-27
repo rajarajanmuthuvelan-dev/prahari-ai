@@ -16,6 +16,7 @@ class Settings(BaseSettings):
         "http://localhost:3000",
         "http://localhost:8443",
         "http://127.0.0.1:8443",
+        "https://prahariai-eight.vercel.app"
     ]
 
     max_upload_size_mb: int = 10
