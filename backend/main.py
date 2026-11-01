@@ -11,7 +11,12 @@ from app.services.nlp_service import _ai_analysis_service
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
-    await asyncio.to_thread(_ai_analysis_service.load_models)
+
+    if settings.ai_models_enabled:
+        await asyncio.to_thread(_ai_analysis_service.load_models)
+    else:
+        print("AI model loading disabled for startup.")
+
     yield
 
 
