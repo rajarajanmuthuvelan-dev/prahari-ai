@@ -1,3 +1,4 @@
+
 import base64
 import os
 import tarfile
@@ -135,11 +136,20 @@ def _download_database(
 
         return True
 
-    except urllib.error.HTTPError as exc:
+    except urllib.error.HTTPError as error:
+
+        try:
+            response_body = error.read().decode(
+                "utf-8",
+                errors="replace",
+            )
+        except Exception:
+            response_body = "Could not read MaxMind response"
 
         print(
             f"{database['filename']} download failed: "
-            f"HTTP {exc.code} - {exc.reason}"
+            f"HTTP {error.code} - {error.reason}; "
+            f"Response: {response_body[:1000]}"
         )
 
         return False
@@ -163,7 +173,6 @@ def _download_database(
         return False
 
     finally:
-
         temporary_path.unlink(missing_ok=True)
 
 
@@ -192,6 +201,8 @@ def ensure_geoip_databases() -> dict:
             account_id,
             license_key,
         )
+
+    print(f"GeoIP database status: {results}")
 
     return results
 
