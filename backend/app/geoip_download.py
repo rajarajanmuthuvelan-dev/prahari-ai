@@ -56,6 +56,7 @@ def _download_database(
         headers={
             "Authorization": f"Basic {auth}",
             "User-Agent": "Prahari-AI/1.0",
+            "x-amz-content-sha256": "UNSIGNED-PAYLOAD",
         },
     )
 
