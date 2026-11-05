@@ -12,7 +12,8 @@ from ..config import settings
 from .ioc_normalizer import parse_ip_address
 
 logger = logging.getLogger(__name__)
-_reader = None
+_city_reader = None
+_asn_reader = None
 
 
 def _provider_outcome(
@@ -33,48 +34,149 @@ def _provider_outcome(
     }
 
 
-def _get_maxmind_reader():
-    global _reader
-    if _reader is not None:
-        return _reader
+
+def _get_city_reader():
+    global _city_reader
+
+    if _city_reader is not None:
+        return _city_reader
+
     try:
         import geoip2.database
-        _reader = geoip2.database.Reader(settings.geoip_db_path)
+        from pathlib import Path
+
+        db_path = Path(settings.geoip_db_path)
+
+        if not db_path.is_file():
+            _city_reader = False
+        else:
+            _city_reader = geoip2.database.Reader(str(db_path))
+
     except Exception:
-        logger.info("MaxMind GeoIP database is unavailable", exc_info=True)
-        _reader = False
-    return _reader
+        logger.warning("MaxMind City database unavailable", exc_info=True)
+        _city_reader = False
+
+    return _city_reader
+
+
+def _get_asn_reader():
+    global _asn_reader
+
+    if _asn_reader is not None:
+        return _asn_reader
+
+    try:
+        import geoip2.database
+        from pathlib import Path
+
+        db_path = Path(settings.geoip_asn_db_path)
+
+        if not db_path.is_file():
+            _asn_reader = False
+        else:
+            _asn_reader = geoip2.database.Reader(str(db_path))
+
+    except Exception:
+        logger.warning("MaxMind ASN database unavailable", exc_info=True)
+        _asn_reader = False
+
+    return _asn_reader
 
 
 def _maxmind_lookup(ip: str) -> Optional[dict]:
-    reader = _get_maxmind_reader()
-    if not reader:
+    city_reader = _get_city_reader()
+    asn_reader = _get_asn_reader()
+
+    city_data = None
+    asn_data = None
+
+    if city_reader:
+        try:
+            city_data = city_reader.city(ip)
+        except Exception:
+            logger.info(
+                "MaxMind City lookup unavailable for %s",
+                ip,
+                exc_info=True,
+            )
+
+    if asn_reader:
+        try:
+            asn_data = asn_reader.asn(ip)
+        except Exception:
+            logger.info(
+                "MaxMind ASN lookup unavailable for %s",
+                ip,
+                exc_info=True,
+            )
+
+    if city_data is None and asn_data is None:
         return None
-    try:
-        response = reader.city(ip)
-    except Exception:
-        logger.info("MaxMind has no GeoIP record for %s", ip, exc_info=True)
-        return None
+
+    autonomous_system_number = (
+        getattr(asn_data, "autonomous_system_number", None)
+        if asn_data else None
+    )
+
+    autonomous_system_organization = (
+        getattr(asn_data, "autonomous_system_organization", None)
+        if asn_data else None
+    )
+
+    asn_network = (
+        str(asn_data.network)
+        if asn_data and getattr(asn_data, "network", None)
+        else None
+    )
+
+    country = city_data.country.name if city_data else None
+    country_code = city_data.country.iso_code if city_data else None
+
+    region = (
+        city_data.subdivisions.most_specific.name
+        if city_data else None
+    )
+
+    city = city_data.city.name if city_data else None
+
+    latitude = city_data.location.latitude if city_data else None
+    longitude = city_data.location.longitude if city_data else None
+
+    accuracy_radius = (
+        city_data.location.accuracy_radius
+        if city_data else None
+    )
+
     return {
-        "country": response.country.name,
-        "country_code": response.country.iso_code,
-        "region": response.subdivisions.most_specific.name,
-        "city": response.city.name,
-        "asn": None,
-        "asn_name": None,
-        "isp": None,
+        "country": country,
+        "country_code": country_code,
+        "region": region,
+        "city": city,
+        "asn": (
+            f"AS{autonomous_system_number}"
+            if autonomous_system_number is not None
+            else None
+        ),
+        "asn_name": autonomous_system_organization,
+        "isp": autonomous_system_organization,
         "reverse_dns": None,
-        "network": None,
+        "network": asn_network,
         "network_type": None,
         "infrastructure_type": None,
+        "latitude": latitude,
+        "longitude": longitude,
         "confidence": None,
-        "accuracy_radius_km": response.location.accuracy_radius,
-        "location_note": "Approximate infrastructure location; city-level data is not precise.",
+        "accuracy_radius_km": accuracy_radius,
+        "location_note": (
+            "Approximate IP infrastructure location; "
+            "not the sender's verified physical location."
+        ),
         "source": "MAXMIND",
-        "provider": "MaxMind GeoIP",
+        "provider": "MaxMind GeoLite2 City + ASN",
         "status": "FOUND",
         "checked_at": datetime.now(timezone.utc).isoformat(),
     }
+
 
 
 async def _ip_api_lookup(ip: str) -> Optional[dict]:
@@ -426,7 +528,12 @@ async def lookup_ip(ip: str) -> Optional[dict]:
 
     maxmind_result = await asyncio.to_thread(_maxmind_lookup, str(address))
     if maxmind_result is None:
-        maxmind_status = "NOT_FOUND" if _reader not in (None, False) else "UNAVAILABLE"
+        maxmind_status = (
+            "NOT_FOUND"
+            if _city_reader not in (None, False)
+            or _asn_reader not in (None, False)
+            else "UNAVAILABLE"
+        )
         maxmind_result = _provider_outcome(
             "MAXMIND", "MaxMind GeoIP", maxmind_status
         )

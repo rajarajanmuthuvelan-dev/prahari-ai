@@ -6,14 +6,27 @@ from app.config import settings
 from app.database import init_db
 from app.routers import email, cases, ioc, reports
 from app.services.nlp_service import _ai_analysis_service
+from app.geoip_download import ensure_geoip_databases
+
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    geoip_results = await asyncio.to_thread(
+        ensure_geoip_databases
+    )
+
+    print(
+        "GeoIP database status:",
+        geoip_results,
+    )
+
     await init_db()
 
     if settings.ai_models_enabled:
-        await asyncio.to_thread(_ai_analysis_service.load_models)
+        await asyncio.to_thread(
+            _ai_analysis_service.load_models
+        )
     else:
         print("AI model loading disabled for startup.")
 
@@ -48,10 +61,17 @@ def health():
 
 @app.get("/api/status")
 def api_status():
-    import os
+    from pathlib import Path
+
+    city_available = Path(settings.geoip_db_path).is_file()
+    asn_available = Path(settings.geoip_asn_db_path).is_file()
+
     return {
         "backend": True,
         "virustotal": bool(settings.virustotal_api_key),
         "abuseipdb": bool(settings.abuseipdb_api_key),
-        "geoip": bool(settings.geoip_db_path and os.path.exists(settings.geoip_db_path)),
+        "geoip": city_available,
+        "geoip_city": city_available,
+        "geoip_asn": asn_available,
+        "geoip_full": city_available and asn_available,
     }

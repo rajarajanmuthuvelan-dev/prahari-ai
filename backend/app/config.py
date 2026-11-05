@@ -8,7 +8,8 @@ class Settings(BaseSettings):
 
     virustotal_api_key: str = ""
     abuseipdb_api_key: str = ""
-    geoip_db_path: str = "/app/data/GeoLite2-City.mmdb"
+    geoip_db_path: str = "/tmp/GeoLite2-City.mmdb"
+    geoip_asn_db_path: str = "/tmp/GeoLite2-ASN.mmdb"
 
     secret_key: str = "change-me-in-production"
     allowed_origins: List[str] = [
