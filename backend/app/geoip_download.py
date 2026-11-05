@@ -1,9 +1,10 @@
-
 import base64
 import os
 import tarfile
 import tempfile
 import urllib.request
+import urllib.error
+
 from pathlib import Path
 
 
@@ -29,9 +30,17 @@ DATABASES = {
 }
 
 
-def _download_database(database: dict, account_id: str, license_key: str) -> bool:
+def _download_database(
+    database: dict,
+    account_id: str,
+    license_key: str,
+) -> bool:
+
     db_path = Path(
-        os.getenv(database["env_path"], database["default_path"])
+        os.getenv(
+            database["env_path"],
+            database["default_path"],
+        )
     )
 
     if db_path.is_file() and db_path.stat().st_size > 0:
@@ -43,64 +52,118 @@ def _download_database(database: dict, account_id: str, license_key: str) -> boo
 
     request = urllib.request.Request(
         database["url"],
-        headers={"Authorization": f"Basic {auth}"},
+        headers={
+            "Authorization": f"Basic {auth}",
+            "User-Agent": "Prahari-AI/1.0",
+        },
     )
+
+    db_path.parent.mkdir(parents=True, exist_ok=True)
 
     temporary_path = db_path.with_suffix(".mmdb.tmp")
 
     try:
-        db_path.parent.mkdir(parents=True, exist_ok=True)
-
+        # Download archive into a temporary file.
         with tempfile.TemporaryFile() as archive:
-            with urllib.request.urlopen(request, timeout=120) as response:
+
+            with urllib.request.urlopen(
+                request,
+                timeout=120,
+            ) as response:
+
                 while True:
                     chunk = response.read(1024 * 1024)
+
                     if not chunk:
                         break
+
                     archive.write(chunk)
 
             archive.seek(0)
 
-            with tarfile.open(fileobj=archive, mode="r:gz") as tar:
+            # Extract only the required MMDB file.
+            with tarfile.open(
+                fileobj=archive,
+                mode="r:gz",
+            ) as tar:
+
                 member = next(
                     (
-                        item for item in tar.getmembers()
+                        item
+                        for item in tar.getmembers()
                         if item.isfile()
-                        and Path(item.name).name == database["filename"]
+                        and Path(item.name).name
+                        == database["filename"]
                     ),
                     None,
                 )
 
                 if member is None:
-                    raise RuntimeError("Database file not found in archive.")
+                    raise RuntimeError(
+                        "Database file not found in archive."
+                    )
 
                 source = tar.extractfile(member)
+
                 if source is None:
-                    raise RuntimeError("Could not read database archive.")
+                    raise RuntimeError(
+                        "Could not read database archive."
+                    )
 
                 with source, temporary_path.open("wb") as output:
+
                     while True:
                         chunk = source.read(1024 * 1024)
+
                         if not chunk:
                             break
+
                         output.write(chunk)
 
-        if not temporary_path.is_file() or temporary_path.stat().st_size == 0:
+        if (
+            not temporary_path.is_file()
+            or temporary_path.stat().st_size == 0
+        ):
             raise RuntimeError("Downloaded database is empty.")
 
+        # Atomically replace the destination file.
         temporary_path.replace(db_path)
 
-        print(f"{database['filename']} downloaded successfully.")
+        print(
+            f"{database['filename']} downloaded successfully."
+        )
+
         return True
 
-    except Exception as exc:
+    except urllib.error.HTTPError as exc:
+
         print(
             f"{database['filename']} download failed: "
-            f"{type(exc).__name__}"
+            f"HTTP {exc.code} - {exc.reason}"
         )
+
+        return False
+
+    except urllib.error.URLError as exc:
+
+        print(
+            f"{database['filename']} download failed: "
+            f"Network error - {exc.reason}"
+        )
+
+        return False
+
+    except Exception as exc:
+
+        print(
+            f"{database['filename']} download failed: "
+            f"{type(exc).__name__}: {exc}"
+        )
+
         return False
 
     finally:
+
         temporary_path.unlink(missing_ok=True)
 
 
@@ -111,12 +174,19 @@ def ensure_geoip_databases() -> dict:
     license_key = os.getenv("MAXMIND_LICENSE_KEY")
 
     if not account_id or not license_key:
-        print("GeoIP unavailable: MaxMind credentials are missing.")
-        return {"city": False, "asn": False}
+        print(
+            "GeoIP unavailable: MaxMind credentials are missing."
+        )
+
+        return {
+            "city": False,
+            "asn": False,
+        }
 
     results = {}
 
     for name, database in DATABASES.items():
+
         results[name] = _download_database(
             database,
             account_id,
@@ -126,7 +196,9 @@ def ensure_geoip_databases() -> dict:
     return results
 
 
-# Backwards-compatible function name.
 def ensure_geoip_database() -> bool:
+    """Backwards-compatible City database function."""
+
     results = ensure_geoip_databases()
+
     return results["city"]
